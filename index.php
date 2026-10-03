@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/../config/db.php';
 $pageTitle = 'Home';
 $activeNav = 'home';
-require_once __DIR__ . '/includes/site_header.php';
+require_once __DIR__ . '/../includes/site_header.php';
 
 $makes = $pdo->query("SELECT DISTINCT make FROM cars ORDER BY make")->fetchAll(PDO::FETCH_COLUMN);
 $bodyTypes = $pdo->query("SELECT DISTINCT body_type FROM cars WHERE body_type IS NOT NULL ORDER BY body_type")->fetchAll(PDO::FETCH_COLUMN);
@@ -23,7 +23,7 @@ $totalAvailable = $pdo->query("SELECT COUNT(*) FROM cars WHERE status = 'availab
         <h1>Find Your Next <span>Ride</span>, Hassle-Free</h1>
         <p>Browse <?= (int)$totalAvailable ?>+ quality vetted cars with transparent pricing. No hidden costs, no games — just honest deals.</p>
 
-        <form class="search-card" method="GET" action="cars.php">
+        <form class="search-card" method="GET" action="/cars.php">
             <div>
                 <label>Make</label>
                 <select name="make">
@@ -67,7 +67,7 @@ $totalAvailable = $pdo->query("SELECT COUNT(*) FROM cars WHERE status = 'availab
                     <h2 style="margin-bottom:0;">Featured Listings</h2>
                 </div>
             </div>
-            <a href="cars.php" class="btn btn-outline">View All Cars</a>
+            <a href="/cars.php" class="btn btn-outline">View All Cars</a>
         </div>
 
         <div class="car-grid">
@@ -75,7 +75,7 @@ $totalAvailable = $pdo->query("SELECT COUNT(*) FROM cars WHERE status = 'availab
                 <div class="empty-state" style="grid-column:1/-1;">No featured listings yet — check back soon.</div>
             <?php endif; ?>
             <?php foreach ($featured as $car): ?>
-                <?php include __DIR__ . '/includes/car_card.php'; ?>
+                <?php include __DIR__ . '/../includes/car_card.php'; ?>
             <?php endforeach; ?>
         </div>
     </div>
@@ -113,4 +113,4 @@ $totalAvailable = $pdo->query("SELECT COUNT(*) FROM cars WHERE status = 'availab
     </div>
 </section>
 
-<?php require_once __DIR__ . '/includes/site_footer.php'; ?>
+<?php require_once __DIR__ . '/../includes/site_footer.php'; ?>
